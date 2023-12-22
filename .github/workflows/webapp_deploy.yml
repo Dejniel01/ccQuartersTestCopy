@@ -36,11 +36,26 @@ jobs:
         
       - name: Build and Test
         run: flutter build web
-        
+      
+  deploy:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: .\build\web
+
       - name: Deploy to Azure Web App
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'CCQuarters'
-          slot-name: 'production'
           publish-profile: ${{ secrets.CCQUARTERS_PUBLISH_PROFILE }}
-          package: '.\build\web'
+          package: '.'
