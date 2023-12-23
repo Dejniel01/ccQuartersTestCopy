@@ -10,10 +10,6 @@ jobs:
  build:
    runs-on: ubuntu-latest
 
-   defaults:
-     run:
-        working-directory: client/
-
    steps:
      - uses: actions/checkout@v2
 
@@ -24,6 +20,8 @@ jobs:
 
      - name: npm install, build, and test
        run: |
+         ls
+         cd client
          npm install
          npm run build --if-present
          npm run test --if-present
