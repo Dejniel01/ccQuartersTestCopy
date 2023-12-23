@@ -12,10 +12,16 @@ jobs:
 
    defaults:
      run:
-        working-directory: ./client
+        working-directory: client/
 
    steps:
-     - uses: actions/checkout@v2
+     - name: Checkout
+       uses: actions/checkout@v2
+
+     - name: Create env file
+       uses: ./.github/actions/create_env_file
+       with:
+          target_dir: ${{ inputs.path_to_project }}env/
 
      - name: Set up Node.js version
        uses: actions/setup-node@v1
