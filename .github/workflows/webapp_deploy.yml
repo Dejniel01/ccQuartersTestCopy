@@ -27,7 +27,12 @@ jobs:
        uses: subosito/flutter-action@v2
        with:
           flutter-version: '3.x' # Replace with your desired Flutter version
-
+         
+     - name: Create env file
+       uses: ./.github/actions/create_env_file
+       with:
+          target_dir: client/env/
+          
      - name: Flutter web build
        run: flutter build web --release
 
@@ -49,11 +54,6 @@ jobs:
          npm install
          npm run build --if-present
          npm run test --if-present
-         
-     - name: Create env file
-       uses: ./.github/actions/create_env_file
-       with:
-          target_dir: client/env/
          
      - name: Upload artifact for deployment job
        uses: actions/upload-artifact@v2
