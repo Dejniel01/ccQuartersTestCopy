@@ -18,6 +18,9 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v2
 
+     - name: Remove gitignore
+       run: rm ../.gitignore
+
      - name: Set up Node.js version
        uses: actions/setup-node@v1
        with:
