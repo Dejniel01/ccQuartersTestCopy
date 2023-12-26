@@ -32,6 +32,6 @@ runs:
       envkey_APP_ID_MOBILE: 1:642205480758:android:0fcc7883ea8913f2e8a597
       envkey_MESSAGING_SENDER_ID_MOBILE: 642205480758
   - name: Check
-    run: |
-          head ${{ inputs.target_dir }}/.env.dev
-          head ${{ inputs.target_dir }}/.env.production
+    uses: andstor/file-reader-action@v1
+    with:
+      path: ${{ inputs.target_dir }}/.env.production
